@@ -13,10 +13,10 @@ export const Wrapper = styled(View)`
 `;
 
 export const Logo = styled(Image)`
-  background-color: aliceblue;
-  height: 182px;
-  width: 160px;
-  margin-bottom: 20px;
+  background-color: transparent;
+  height: 7.5%;
+  width: 14%;
+  margin-bottom: 0px;
 `;
 
 export const StyledText = styled(Text)`
@@ -29,9 +29,10 @@ export const InputsDiv = styled(View)`
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  height: 180px;
+  height: 24%;
   width: 100%;
-  margin-top: 160px;
+  margin-top: 100px;
+  margin-bottom: 80px;
 `;
 
 export const TextDivs = styled(View)`

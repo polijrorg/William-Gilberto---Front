@@ -32,6 +32,7 @@ export const AuthProvider: React.FC<{ children?: React.ReactNode | undefined }> 
             };
 
             setUser(response.user);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
             // Errors handling
         }
