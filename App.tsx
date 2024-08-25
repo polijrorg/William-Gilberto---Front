@@ -1,13 +1,18 @@
 import AppProvider from '@hooks/index';
-// import Home from '@screens/Home';
-import Cadastro1 from '@screens/Cadastro1';
-// import Cadastro2 from '@screens/Cadastro2';
+import { AuthProvider } from '@hooks/useAuth';
+import { NavigationContainer } from '@react-navigation/native';
+import Routes from '@routes/index';
 import React from 'react';
 
 export default function App() {
   return (
-    <AppProvider>
-      <Cadastro1 />
-    </AppProvider>
+    <NavigationContainer>   
+      <AuthProvider>
+        <AppProvider>
+          <Routes />
+        </AppProvider>        
+      </AuthProvider>   
+
+    </NavigationContainer>
   );
 }

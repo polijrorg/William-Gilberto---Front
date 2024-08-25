@@ -1,4 +1,4 @@
-import { Text, View, Image, KeyboardAvoidingView } from 'react-native';
+import { Text, View } from 'react-native';
 import styled from 'styled-components/native';
 
 export const Wrapper = styled(View)`
@@ -6,17 +6,10 @@ export const Wrapper = styled(View)`
   align-items: center;
   justify-content: normal;
   flex-direction: column;
-  padding-top: 80px;
+  padding-top: 60px;
   height: 100%;
   width: 100%;
   background-color: #1c0f13;
-`;
-
-export const Logo = styled(Image)`
-  background-color: aliceblue;
-  height: 182px;
-  width: 160px;
-  margin-bottom: 20px;
 `;
 
 export const StyledText = styled(Text)`
@@ -24,7 +17,7 @@ export const StyledText = styled(Text)`
   margin-top: 32px;
 `;
 
-export const InputsDiv = styled(KeyboardAvoidingView)`
+export const InputsDiv = styled(View)`
   display: flex;
   align-items: center;
   justify-content: space-between;

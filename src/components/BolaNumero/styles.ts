@@ -11,7 +11,7 @@ export const Container = styled(View)<StyledProps>`
     height: ${({height}) => height};
     width: ${({width}) => width};
     margin-top: 32px;
-    border-radius: ${({height}) => height}/2;
+    border-radius: 24px;
     background-color: #ffa800;
     align-items: center;
     justify-content: center;

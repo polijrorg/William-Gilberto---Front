@@ -32,7 +32,7 @@ export const InputsDiv = styled(View)`
   height: 24%;
   width: 100%;
   margin-top: 100px;
-  margin-bottom: 80px;
+  margin-bottom: 182.4px;
 `;
 
 export const TextDivs = styled(View)`

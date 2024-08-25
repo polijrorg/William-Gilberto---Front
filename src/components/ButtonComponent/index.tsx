@@ -7,24 +7,23 @@ type ButtonProps = {
     text?: string;
     height: string;
     width: string;
+    func: () => void;
 };
 
 
-const ButtonComponent: React.FC<ButtonProps> = ({ color, text, width, height, image }) => {
+const ButtonComponent: React.FC<ButtonProps> = ({ color, text, width, height, image, func }) => {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const imageSource = image ? require('public/assets/images/Vector.png') : null;
 
     return (
-        <S.Container height={height} width={width} color={color}>
+        <S.Container height={height} width={width} color={color} onPress={func}>
             {imageSource ? (
                 <S.StyledImage
                     source={imageSource}
                 >
                 </S.StyledImage>
             ) : (
-                <S.Container height={height} color={color} width='80%'>
-                    <S.StyledText color='#ebebeb'>{text}</S.StyledText>
-                </S.Container>
+                <S.StyledText color='#ebebeb'>{text}</S.StyledText>
             )}
         </S.Container>
     );

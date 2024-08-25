@@ -17,14 +17,12 @@ export const Container = styled(TouchableOpacity)<StyledProps>`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    
 `;
 
 export const StyledText = styled(Text)<{ color?: string }>`
   ${({ theme, color }) => css`
     font-size: 20px;
     font-weight: 400;
-    filter: drop-shadow(red 0rem 1rem 10px);
     color: ${color || `${theme.colors.black}`};
   `}
 `;

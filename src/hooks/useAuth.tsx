@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useContext, useState, createContext } from 'react';
+import React, { useContext, useState, createContext, useLayoutEffect } from 'react';
 
 import api from '@services/api';
 
@@ -14,7 +14,7 @@ interface ILoginRequest {
 
 interface AuthContextData {
     user: User;
-    login: (data: ILoginRequest) => void;
+    Login: (data: ILoginRequest) => void;
     logout: () => void;
 }
 
@@ -23,28 +23,51 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 export const AuthProvider: React.FC<{ children?: React.ReactNode | undefined }> = ({ children }) => {
     const [user, setUser] = useState({} as User);
 
-    const login = async (data: ILoginRequest) => {
+    const Login = async (data: ILoginRequest) => {
         try {
             const response = await UserService.login(data);
 
             api.defaults.headers.common = {
                 Authorization: `Bearer ${response.token}`
             };
-
             setUser(response.user);
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        } catch (error) {
-            // Errors handling
+            AsyncStorage.setItem('@app:token', response.token);
+            AsyncStorage.setItem('@app:useId', response.user.id);
+        } catch (err) {
+            throw new Error((err as Error).message);
         }
     };
 
     const logout = () => {
+        setUser({} as User);
+
+        delete api.defaults.headers.common.Authorization;
+        
         AsyncStorage.removeItem('@app:token');
         AsyncStorage.removeItem('@app:useId');
     };
 
+    useLayoutEffect(() => {
+        const refreshUser = async () => {
+            const token = await AsyncStorage.getItem('@app:token');
+            if (token !== undefined) {
+                api.defaults.headers.common = {
+                    Authorization: `Bearer ${token}`
+                };
+                const userId = AsyncStorage.getItem('@app:userId');
+                try{
+                    const response = await UserService.GetUserById(await userId);
+                    setUser(response);
+                } catch(err) {
+                    new Error((err as Error).message);
+                };
+            }
+        };
+        refreshUser();
+    }, []);
+
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, Login, logout }}>
             {children}
         </AuthContext.Provider>
     );
