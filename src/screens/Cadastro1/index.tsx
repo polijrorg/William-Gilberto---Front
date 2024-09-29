@@ -44,8 +44,9 @@ const Cadastro1 = ({navigation}) => {
     };
 
   return(
-  <S.Wrapper>
+    <S.Wrapper>
     <StatusBar style="light" />
+    <S.Avoid behavior='position'>
     <BolaNumero num='1' width='48px' height='48px'/>
     <S.InputsDiv>
       <LoginInputs password={false} text='Nome:' height='60px' func={setNome}/>
@@ -53,10 +54,15 @@ const Cadastro1 = ({navigation}) => {
       <LoginInputs password={false} text='CPF:' height='60px'func={setCPF}/>
     </S.InputsDiv>
     {error && <S.StyledText>{error}</S.StyledText>}
+    <S.styledView>
     <ButtonComponent height='60px' color='#ffa800' width='36%' text='text' image='public/assets/images/Vector.png' func={() => {
         handleCadastro1();
       }}/>
+    </S.styledView>
+
+  </S.Avoid>
   </S.Wrapper>
+
   );
 };
 

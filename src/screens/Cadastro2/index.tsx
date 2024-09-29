@@ -44,7 +44,8 @@ const Cadastro2 = ({navigation, route}) => {
           setBool(false);
           navigation.navigate("Home");
           console.log("sssssss");
-        } catch {
+        } catch (err){
+          console.log(err);
           setError('Por Favor, preencha todos os campos');
           console.log(nome,email,CPF,senha,confirme);
           console.log("aaaaaa");
@@ -56,15 +57,19 @@ const Cadastro2 = ({navigation, route}) => {
   return(
     <S.Wrapper>
     <StatusBar style="light" />
+    <S.Avoid behavior='position'>  
     <BolaNumero num='2' width='48px' height='48px'/>
     <S.InputsDiv>
       <LoginInputs password={true} text='Senha:' height='60px' func={setSenha}/>
       <LoginInputs password={true} text='Confirme a Senha:' height='60px' func={setConfirme}/>
     </S.InputsDiv>
     {error && <S.StyledText>{error}</S.StyledText>}
+    <S.styledView>
     <ButtonComponent height='60px' color='#ffa800' width='36%' text='text' image='public/assets/images/Vector.png' func={() => {
       cadastro();
     }}/>
+    </S.styledView>
+    </S.Avoid>
   </S.Wrapper>
   );
 };

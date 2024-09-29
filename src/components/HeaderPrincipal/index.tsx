@@ -7,13 +7,17 @@ type ButtonProps = {
     text2: string
     height: string;
     width: string;
+    func: (b: boolean) => void;
+    isOpen: boolean;
 };
 
 
-const HeaderPrincipal: React.FC<ButtonProps> = ({ text1, text2, width, height }) => {
+const HeaderPrincipal: React.FC<ButtonProps> = ({ text1, text2, width, height, func, isOpen }) => {
     return (
         <S.Header width={width} height={height}>
-            <S.StyledImage height="24px" width = "38.2px" source={require('public/assets/images/Component 20.png')}/>
+            <S.Touch onPress={() => {func(!isOpen);}}>
+                <S.StyledImage height="24px" width = "38.2px" source={require('public/assets/images/Component 20.png')}/>
+            </S.Touch>
             <S.HeaderTexts>
                 <S.StyledText color="#ebebeb" height="20px">{text1}</S.StyledText>
                 <S.StyledText color="#ffa800" height="14px">{text2}</S.StyledText>

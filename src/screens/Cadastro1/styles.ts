@@ -1,4 +1,4 @@
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, KeyboardAvoidingView } from 'react-native';
 import styled from 'styled-components/native';
 
 export const Wrapper = styled(View)`
@@ -24,12 +24,22 @@ export const StyledText = styled(Text)`
   margin-top: 32px;
 `;
 
+export const styledView = styled(View)`
+  margin-left: 30%;
+  width: 400px;
+`;
+
+export const Avoid = styled(KeyboardAvoidingView)`
+  width: 360px;
+  height: 640px;
+`;
+
 export const InputsDiv = styled(View)`
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  height: 40%;
+  height: 320px;
   width: 100%;
   margin-top: 100px;
   margin-bottom: 80px;

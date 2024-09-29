@@ -16,7 +16,7 @@ export const Container = styled(View)<StyledProps>`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    
+    margin-left: 44%;
 `;
 
 export const StyledText = styled(Text)<{ color?: string }>`

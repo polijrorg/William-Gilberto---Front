@@ -18,6 +18,18 @@ export const theme = {
 
       surface: '#FFFFFF',
       divider: '#E6EAED',
-      background: '#FAFAFA'
+      background: '#FAFAFA',
+
+      segments: {
+        "imobiliario": "#0047bb",
+        "ações BR": '#017E3d',
+        "ações EUA": '#37fb07',
+        "ações INT": "#66f",
+        "reit": "#fff",
+        "reits": "#fff",
+        "fii": "#0af",
+        "crypto": "#f1bc00",
+        "renda fixa": "#d00202"
+      }
   }
 };

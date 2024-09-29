@@ -17,6 +17,12 @@ export const Logo = styled(Image)`
   height: 182px;
   width: 160px;
   margin-bottom: 20px;
+  margin-left: 28%;
+`;
+
+export const Avoid = styled(KeyboardAvoidingView)`
+  width: 360px;
+  height: 640px;
 `;
 
 export const StyledText = styled(Text)`
@@ -41,4 +47,10 @@ export const TextDivs = styled(View)`
   flex-direction: row;
   height: 60px;
   width: 80%;
+  margin-left: 11%;
+`;
+
+export const styledView = styled(View)`
+  margin-left: 6%;
+  width: 400px;
 `;

@@ -7,6 +7,8 @@ interface StyledProps {
     width?: string;
 };
 
+export const Touch = styled(TouchableOpacity)``;
+
 export const Header = styled(View)<StyledProps>`
   display: flex;
   align-items: center;
