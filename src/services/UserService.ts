@@ -285,6 +285,32 @@ export default class UserService {
         };
     }
 
+    static async TransferInvestment(id: string) {
+        try {
+            const response = await api.get(
+                `/investments/transfer/${id}`
+            );
+
+            return response.data;
+        } catch(err) {
+            throw new Error((err as Error).message);
+        }
+    }
+
+    /* Indicadores */
+
+    static async GetAllIndicators() {
+        try {
+            const response = await api.get(
+                `/indicators/getAll`
+            );
+
+            return response.data;
+        } catch(err) {
+            throw new Error((err as Error).message);
+        }
+    }    
+
     /* Estratégia Real */
 
     static async GetUserRealStrategy(userid: string) {

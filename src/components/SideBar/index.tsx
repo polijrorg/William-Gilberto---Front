@@ -57,7 +57,7 @@ const SideBar: React.FC<CardProps> = ({ color, width, height, func, isOpen }) =>
                     <S.StyledImage source={require('public/assets/images/grafico.png')} />
                     <S.StyledText color='#ebebeb' size='24px'>Estratégia Ideal</S.StyledText>   
                 </S.IconText>
-                <S.IconText width={'100%'}>
+                <S.IconText width={'100%'} onPress={() => {func(!isOpen);navigation.navigate("Setup_Indicadores")}}>
                     <S.StyledImage source={require('public/assets/images/config.png')}/>
                     <S.StyledText color='#ebebeb' size='24px'>Setup de Indicadores</S.StyledText>   
                 </S.IconText>

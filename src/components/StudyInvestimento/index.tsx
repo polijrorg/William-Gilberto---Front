@@ -38,7 +38,14 @@ const StudyInvestimento: React.FC<CardProps> = ({ color, height, width, invest, 
                     <S.StyledText color='#ebebeb' size='16px'>{invest.value} R$</S.StyledText>
                     <S.StyledText color='#ebebeb' size='16px'>Cotas - {invest.quota}</S.StyledText>
                 </S.VerticalDiv>
-                <S.Touch><S.StyledImage source={require("public/assets/images/SVGRepo_iconCarrier.png")} /></S.Touch>
+                <S.Touch onPress={async () => {
+                    try {
+                        UserService.TransferInvestment(invest.id);
+                        setReloader(!reloader);
+                    } catch(err) {
+                        console.log(err);
+                    };
+                }}><S.StyledImage source={require("public/assets/images/SVGRepo_iconCarrier.png")} /></S.Touch>
                 <S.VerticalDiv>
                     <S.Touch onPress={async () => {
                         console.log("Editar");

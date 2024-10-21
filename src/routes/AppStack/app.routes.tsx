@@ -10,15 +10,32 @@ import Carteira_de_Estudos from "@screens/Carteira_de_Estudos";
 import Estratégia_Real from "@screens/Estratégia_Real";
 import Estratégia_Ideal from "@screens/Estratégia_Ideal";
 import EditInvest from "@screens/EditInvest";
+import Setup_Indicadores from "@screens/Setup_Indicadores";
+import CreateSetup from "@screens/CreateSetup";
+import Como_Usar from "@screens/Como_Usar";
 
 const AppStack = createNativeStackNavigator();
 
 const AppRoutes: React.FC = () => (
     <AppStack.Navigator>
 
+        <AppStack.Screen name='Como_Usar'
+         component={Como_Usar}
+        options={{ header: () => <></> }}/>        
 
         <AppStack.Screen name='Home'
          component={Home}
+        options={{ header: () => <></> }}/>
+
+<AppStack.Screen name='Setup_Indicadores'
+         component={Setup_Indicadores}
+        options={{ header: () => <></> }}/>
+
+
+
+
+<AppStack.Screen name='CreateSetup'
+         component={CreateSetup}
         options={{ header: () => <></> }}/>
 
         <AppStack.Screen name='CreateInvest'
