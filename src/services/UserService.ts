@@ -60,6 +60,11 @@ interface ICreateInvestment {
     studyWalletId?: string;
 }
 
+interface ICreateSetup {
+    userid: string;
+    name: string;
+}
+
 export default class UserService {
     static async RestorePassword(email: string): Promise<string> {
         try {
@@ -304,12 +309,27 @@ export default class UserService {
             const response = await api.get(
                 `/indicators/getAll`
             );
-
+            console.log(response.data);
             return response.data;
         } catch(err) {
+            console.log(err);
             throw new Error((err as Error).message);
         }
     }    
+
+    static async CreateSetup(data: ICreateSetup): Promise<Investments> {
+        try {
+            const response: AxiosResponse<Investments> = await api.post(
+                '/setup/create',
+                data
+            );
+
+            return response.data;
+        } catch (err) {
+            console.log(err);
+            throw new Error((err as Error).message);
+        }
+    }
 
     /* Estratégia Real */
 

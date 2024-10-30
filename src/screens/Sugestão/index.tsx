@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import * as S from './styles';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
@@ -7,9 +6,10 @@ import Header from '@components/Header';
 import { VictoryPie } from 'victory-native';
 import UserService from '@services/UserService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import EstrategiaRealComponent from '@components/EstrategiaRealComponent';
 import { Segment } from '@interfaces/RealStrategy';
-import ButtonComponent from '@components/ButtonComponent';
-import EstrategiaIdealComponent from '@components/EstrategiaIdealComponent';
+import Pesquisar from '@components/Pesquisar';
+import SugestãoComponent from '@components/SugestãoComponent';
 
 interface DataProps {
   nome: string;
@@ -17,10 +17,12 @@ interface DataProps {
   color: string;
 }
 
-const Estratégia_Ideal = ({ navigation }) => {
+const Sugestão = () => {
   const [isOpen,setIsOpen] = useState(false);
   const [data, setData] = useState<DataProps[]>([]);
   const [inData, setInData] = useState<Segment[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const get = async () => {
@@ -50,7 +52,7 @@ const Estratégia_Ideal = ({ navigation }) => {
   <S.Container align="normal">
     <StatusBar style="light" />
     <SideBar height={isOpen ? '100%' : '0px'} width={isOpen ? '80%' :'0%'} func={setIsOpen} isOpen={isOpen}/>
-    <Header height={'60px'} width={isOpen ? '0%' :'100%'} text={`Estratégia Ideal`} func={setIsOpen} isOpen={isOpen} temSidebar={true}/>
+    <Header height={'60px'} width={isOpen ? '0%' :'100%'} text={`Sugestão`} func={setIsOpen} isOpen={isOpen} temSidebar={true}/>
     <S.GraphDiv height={"30%"}>
     <VictoryPie
       data={
@@ -77,21 +79,15 @@ const Estratégia_Ideal = ({ navigation }) => {
     />
     </S.GraphDiv>
     <S.Caixa>
-      <S.StyledText color='#ebebeb' height='28px' underline={false}>Estratégia Ideal</S.StyledText>
-      <S.HorizontalDiv width="100%">
-        <ButtonComponent height={'36px'} width={'70%'} text='Adicionar novo Investimento' color='#FFA800' func={() => {navigation.navigate("CreateInvest");}}/>
-        <S.Touch onPress={() => {}}>
-          <S.StyledText color='#FFA800' height="16px" underline={true}>Editar</S.StyledText>
-        </S.Touch>
-      </S.HorizontalDiv>      
+      <Pesquisar height={'36%'} width={'90%'} color='#331C23' text='Pesquisar Investimento...' invests={[]} func={setSearch}/>
       <S.InvestDiv height="36%">
-        <EstrategiaIdealComponent height={'36px'} width={'90%'} segment={{id: '0', name: "Teste", value: 100}} color='#f10010'/>
+        <SugestãoComponent height={'36px'} width={'90%'} invest={{studyWalletid: '', realWalletid: '', quota: 0,asset: 'Nome', segment: '',value: 0,note: ''}} color='#f11010'/>
         {inData && inData.length > 0 ? inData.map((segment, index) => (
-        <EstrategiaIdealComponent key={index} height={'36px'} width={'90%'} segment={segment} color={data[index].color}/>
-        )) : <S.StyledText color='#ebebeb' height='28px' underline={false}>No Data Available</S.StyledText>}
+        <EstrategiaRealComponent key={index} height={'36px'} width={'90%'} segment={segment} color={data[index].color}/>
+        )) : <S.StyledText>No Data Available</S.StyledText>}
       </S.InvestDiv>  
     </S.Caixa>
   </S.Container>
 )};
 
-export default Estratégia_Ideal;
+export default Sugestão;

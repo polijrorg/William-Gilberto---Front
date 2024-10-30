@@ -54,7 +54,7 @@ const Carteira_Real = ({navigation}) => {
       colorScale={
           segments && Array.isArray(segments)
           ? segments.map((dado) => (
-              theme.colors.segments[dado.name]
+              theme.colors.segments[dado.name.toLocaleLowerCase()]
           ))
           : []
       }
@@ -71,10 +71,10 @@ const Carteira_Real = ({navigation}) => {
       <ButtonComponent height={'36px'} width={'90%'} text='Adicionar novo Investimento' color='#FFA800' func={() => {navigation.navigate("CreateInvest", params);}}/>
       <S.InvestDiv height="36%">
       {search==="" ? inData.map((invest,index) => 
-        <Investimento key={index} color={theme.colors.segments[invest.segment]} height={'72px'} width={'100%'} invest={invest} reloader={reloader} setReloader={setReloader}/>
+        <Investimento key={index} color={theme.colors.segments[invest.segment.toLocaleLowerCase()]} height={'72px'} width={'100%'} invest={invest} reloader={reloader} setReloader={setReloader}/>
       ) : inData.map((invest, index) => (
         invest.asset.toLocaleUpperCase().includes(search.toLocaleUpperCase()) ?
-        <Investimento key={index} color={theme.colors.segments[invest.segment]} height={'72px'} width={'100%'} invest={invest} reloader={reloader} setReloader={setReloader}/>
+        <Investimento key={index} color={theme.colors.segments[invest.segment.toLocaleLowerCase()]} height={'72px'} width={'100%'} invest={invest} reloader={reloader} setReloader={setReloader}/>
         : null
       ))} 
       </S.InvestDiv>  

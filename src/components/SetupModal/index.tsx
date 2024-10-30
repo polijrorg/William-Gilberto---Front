@@ -2,6 +2,8 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import * as S from './styles';
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import UserService from '@services/UserService';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface Props {
     visible: boolean;
@@ -36,10 +38,20 @@ const SetupModal: React.FC<Props> = ({visible, setVisible}) => {
         <S.Container  width="240px" height="140px">
             <S.StyledText color="#ffa800">Insira o nome do novo setup</S.StyledText>
             <S.StyledInput value={name} onChangeText={setName}/>
-            <S.Touch onPress={() => {
+            <S.Touch onPress={async () => {
                 if(name !== ""){
-                    navigation.navigate("CreateSetup", params);
-                    setVisible(false);
+                    try {
+                        const userid = await AsyncStorage.getItem("@app:useId");
+                        const data = {
+                            userid: userid,
+                            name: name
+                        }
+                        UserService.CreateSetup(data);
+                        navigation.navigate("CreateSetup", params);
+                        setVisible(false);
+                    } catch (e) {
+                        console.log(e);
+                    }
                 }
             }}>
                 <S.StyledText color="#ebebeb">CONTINUAR</S.StyledText>

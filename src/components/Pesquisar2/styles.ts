@@ -60,7 +60,7 @@ export const StyledImage = styled(ImageBackground)`
   margin-top: 4px;
   margin-left: 8px;
   flex: 1;
-  width: 82%;
+  width: 26.24px;
   height: 82%;
   gap: 0px;
 `;

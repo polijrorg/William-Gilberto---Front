@@ -54,5 +54,5 @@ export const Line = styled(Text)`
   height: 1px;
   background-color: #897878;
   margin-top: 16px;
-  margin-left: 5%;
+  margin-left: 0%;
 `;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable react/prop-types */
 import * as S from './styles';
 import { StatusBar } from 'expo-status-bar';
@@ -21,9 +22,6 @@ const CreateInvest = ({navigation, route}) => {
   const [ticker, setTicker] = useState('');
   const [cotas, setCotas] = useState('');
 
-  const [indOptions, setIndOptions] = useState<string[] | null>(null)
-  const [ind, setInd] = useState<string | null>(null);
-
   const [setupOptions, setSetupOptions] = useState<string[] | null>(null)
   const [setup, setSetup] = useState<string | null>(null);
   const [setups, setSetups] = useState<Setup[]>([]);
@@ -38,9 +36,8 @@ const CreateInvest = ({navigation, route}) => {
         const aux1 = UserService.getAllSegmentsNames();
         const usersetups = await UserService.getAllUserSetups(await AsyncStorage.getItem("@app:userId"));
         setSetups(usersetups);
-        setSetupOptions(usersetups.map((setup) => (setup.name)));
+        usersetups.length !== 0 ? setSetupOptions(usersetups.map((setup) => (setup.name))) : setSetupOptions(["No data", "No data"]) ;
         setTipoOptions(await aux1);
-        setIndOptions(["Liquidez", "PV/PA", "Outross"]);
       } catch(err) {
         console.log("Erro no get");
         console.log(err);
@@ -52,8 +49,7 @@ const CreateInvest = ({navigation, route}) => {
     if (
         (tipo === '' ||
           ticker === '' ||
-          cotas === '' ||
-          ind === '') &&
+          cotas === '') &&
         bool
     ) {
         setError('Por Favor, preencha todos os campos');
@@ -61,32 +57,33 @@ const CreateInvest = ({navigation, route}) => {
         setError('');
         setBool(false);
     }
-  }, [tipo, ticker, cotas, ind, bool]);
+  }, [tipo, ticker, cotas, bool]);
 
   const handleCreate = async () => {
     if (
       (tipo === '' ||
         ticker === '' ||
-        cotas === '' ||
-        ind === '')
+        cotas === '')
       ) {
         setError('Por Favor, preencha todos os campos');
         setBool(true);
       } else {   
         setError('');
         setBool(false);
+        console.log("setups", setups);
         try{
           if(isReal){
             const realwallet = await UserService.getUsersRealWallet(await AsyncStorage.getItem("@app:userId"));
+            await console.log("Real", realwallet);
             const data = {
               segment: tipo,
               asset: ticker,
-              value: 123,
+              value: null,
               realWalletid: realwallet.id,
               quota: Number(cotas),
-              setupId: setups.find((u) => (
+              setupId: setups.length !== 0 ? setups.find((u) => (
                 u.name === setup
-              )).id,
+              )).id : '1',
             }
             console.log(data);
             await UserService.CreateInvestment(
@@ -95,16 +92,16 @@ const CreateInvest = ({navigation, route}) => {
           } else {
             console.log("Study:");
             const studywallet = await UserService.getUsersStudyWallet(await AsyncStorage.getItem("@app:userId"));
-            console.log("Study", studywallet);
+            await console.log("Study", studywallet);
             const data = {
               segment: tipo,
               asset: ticker,
-              value: 123,
+              value: null,
               studyWalletid: studywallet.id,
               quota: Number(cotas),
-              setupId: setups.find((u) => (
+              setupId: setups.length !== 0 ? setups.find((u) => (
                 u.name === setup
-              )).id,
+              )).id : '1',
             }
             console.log(data);
             await UserService.CreateInvestment(
@@ -121,10 +118,6 @@ const CreateInvest = ({navigation, route}) => {
 
     const handleTipoSelect = (tipo: string) => {
       setTipo(tipo);
-    };
-
-    const handleIndSelect = (ind: string) => {
-      setInd(ind);
     };
 
   return(
@@ -146,12 +139,6 @@ const CreateInvest = ({navigation, route}) => {
       <CreateInvestInputs password={false} mode="input" text='Quantidade de Cotas' height='60px' boxtext='Digite aqui...' func={setCotas} value={''}/>
       <Dropdown
           text='Setup dos Indicadores'
-          placeholder='Selecionar Indicadores'
-          options={indOptions}
-          onOptionSelect={handleIndSelect}
-          z={99} value={''}      />
-      <Dropdown
-          text='Setups'
           placeholder='Selecionar Setups'
           options={setupOptions}
           onOptionSelect={setSetup}

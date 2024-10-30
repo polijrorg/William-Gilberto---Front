@@ -1,4 +1,4 @@
-import { ImageBackground, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import styled from 'styled-components/native';
 
 interface StyledProps {
@@ -22,18 +22,6 @@ export const HorizontalDiv = styled(View)<StyledProps>`
     padding-right: 12px;
 `;
 
-export const Touch = styled(TouchableOpacity)`
-  width: 32px;
-  height: 32px;
-`;
-
-export const StyledImage = styled(ImageBackground)`
-  margin-top: ${({paddingtop}) => paddingtop};
-  flex: 1;
-  width: 70%;
-  height: 82%;
-  gap: 0px;
-`;
 
 export const Bola = styled(View)<{diameter: string, color: string}>`
     height: ${({diameter}) => diameter};
@@ -56,10 +44,8 @@ export const Container = styled(View)<StyledProps>`
   margin-left: 16px;
 `;
 
-export const StyledText = styled(Text)`
-  color: #ebebeb;
-  padding-top: ${({paddingtop}) => paddingtop};
-  margin-right: 16px;
+export const StyledText = styled(Text)<StyledProps>`
+  color: ${({color}) => color};
 `;
 
 
@@ -68,5 +54,15 @@ export const Line = styled(Text)`
   height: 1px;
   background-color: #897878;
   margin-top: 16px;
-  margin-left: 0%;
+  margin-left: 5%;
+`;
+
+export const Button = styled(TouchableOpacity)<StyledProps>`
+  height: ${({height}) => height};
+  width: ${({width}) => width};
+  background-color: #331c23;
+  border-radius: 3px;
+  margin-top: 0px;
+  justify-content: center;
+  align-items: center;
 `;
