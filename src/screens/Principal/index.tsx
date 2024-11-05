@@ -9,7 +9,7 @@ import SideBar from '@components/SideBar';
 const Principal = () => {
   const {user} = useAuth();
   const [isOpen,setIsOpen] = useState(false);
-
+  
   return(
   <S.Container align="normal">
     <StatusBar style="light" />
