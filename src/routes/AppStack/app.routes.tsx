@@ -13,28 +13,38 @@ import EditInvest from "@screens/EditInvest";
 import Setup_Indicadores from "@screens/Setup_Indicadores";
 import CreateSetup from "@screens/CreateSetup";
 import Como_Usar from "@screens/Como_Usar";
+import CreateAporte from "@screens/CreateAporte";
+import Sugestão from "@screens/Sugestão";
 
 const AppStack = createNativeStackNavigator();
 
 const AppRoutes: React.FC = () => (
     <AppStack.Navigator>
 
-        <AppStack.Screen name='Como_Usar'
-         component={Como_Usar}
-        options={{ header: () => <></> }}/>        
-
         <AppStack.Screen name='Home'
          component={Home}
         options={{ header: () => <></> }}/>
 
-<AppStack.Screen name='Setup_Indicadores'
-         component={Setup_Indicadores}
+        <AppStack.Screen name='Sugestao'
+         component={Sugestão}
         options={{ header: () => <></> }}/>
 
 
+        <AppStack.Screen name='Setup_Indicadores'
+         component={Setup_Indicadores}
+        options={{ header: () => <></> }}/>
+
+        <AppStack.Screen name='CreateAporte'
+         component={CreateAporte}
+        options={{ header: () => <></> }}/>
 
 
-<AppStack.Screen name='CreateSetup'
+        <AppStack.Screen name='Como_Usar'
+         component={Como_Usar}
+        options={{ header: () => <></> }}/>        
+
+
+        <AppStack.Screen name='CreateSetup'
          component={CreateSetup}
         options={{ header: () => <></> }}/>
 

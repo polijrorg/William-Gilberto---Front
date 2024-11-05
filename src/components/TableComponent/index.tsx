@@ -66,7 +66,7 @@ const TableComponent: React.FC<CardProps> = ({ data, setData }) => {
     );
 
     return (
-        <ScrollView horizontal>
+        <ScrollView>
             <S.Container width={width}>
                 <S.HeaderRow width={width}>
                     <S.CelulaHeader width={"16%"} height={"100%"}>

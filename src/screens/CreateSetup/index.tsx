@@ -9,8 +9,8 @@ import ButtonComponent from '@components/ButtonComponent';
 import { useFocusEffect } from '@react-navigation/native';
 import UserService from '@services/UserService';
 import TableComponent from '@components/TableComponent';
-// import { View, Text } from 'react-native';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useWindowDimensions } from 'react-native';
+import Indicador from '@interfaces/Indicador';
 
 type DataItem = {
   id: string;
@@ -20,58 +20,100 @@ type DataItem = {
   num2?: string;
 };
 
-const CreateSetup = ({navigation, route}) => {
-  const {name} = route.params;
+const CreateSetup = ({ navigation, route }) => {
+  const { name } = route.params;
   const [search, setSearch] = useState("");
   const [reloader, setReloader] = useState(false);
   const [options, setOptions] = useState<string[]>([]);
+  const [indicadores, setIndicadores] = useState<Indicador[]>([]);
+  const { width } = useWindowDimensions();
+  const [data, setData] = useState<DataItem[]>([]);
 
-  const [data, setData] = useState<DataItem[]>([
-    {
-      id: '1',
-      resultado: 'BOM',
-      tipo: 'INTERVALADO',
-      num1: '10',
-      num2: '20',
-    },
-    {
-      id: '2',
-      resultado: 'REGULAR',
-      tipo: 'MAIOR QUE',
-      num1: '30',
-    },
-    {
-      id: '3',
-      resultado: 'RUIM',
-      tipo: 'MENOR QUE',
-      num1: '15',
-    }
-  ]);
-  
+  const selecionar = (selecionado: string) => {
+    setSearch(selecionado);
+
+    const selectedData: DataItem[] = indicadores
+      .filter((ind) => ind.name === selecionado)
+      .flatMap((ind) => [
+        ind.nota1 && {
+          id: `${ind.id}-nota1`,
+          resultado: "",
+          tipo: ind.nota1.type,
+          num1: ind.nota1.number1,
+          num2: ind.nota1.number2,
+        },
+        ind.nota2 && {
+          id: `${ind.id}-nota2`,
+          resultado: "",
+          tipo: ind.nota2.type,
+          num1: ind.nota2.number1,
+          num2: ind.nota2.number2,
+        },
+        ind.nota3 && {
+          id: `${ind.id}-nota3`,
+          resultado: "",
+          tipo: ind.nota3.type,
+          num1: ind.nota3.number1,
+          num2: ind.nota3.number2,
+        },
+      ].filter(Boolean) as DataItem[]);
+
+    setData(selectedData);
+    setReloader(!reloader);
+  };
 
   useFocusEffect(
-    useCallback(() => {  
-    const get = async () => {
-      const usersetups = await UserService.GetAllIndicators();
-      setOptions(usersetups.map((ind) => (ind.name)));
-      console.log("Options:",options);
-    }
-    get();
-  },[reloader]));
+    useCallback(() => {
+      const get = async () => {
+        const ind = await UserService.GetAllIndicators();
+        setIndicadores(ind);
+        setOptions(ind.map((ind) => ind.name));
+        console.log("Indicadores:", ind);
+      };
+      get();
+    }, [reloader])
+  );
 
-  return(
+  return (
     <S.Wrapper>
-        <StatusBar style="light" />
-        <Header text={name} height={'60px'} width={'100%'} func={null} isOpen={false} temSidebar={false}/>
-        <S.Margin margin={"32px"}>
-          <Pesquisar2 height={'40px'} width={'90%'} color='#ebebeb' setups={options} text={"Pesquisar seus indicadores ativos"} func={setSearch} values={''}/>
-        </S.Margin>
-        <TableComponent data={data} setData={setData}/>
-        <S.Margin margin={"128px"}>
-          <ButtonComponent text={"SALVAR"} color='#ffa800' height={'60px'} width={'60%'} func={() => {navigation.navigate("Setup_Indicadores")}}/>
-        </S.Margin>
+      <StatusBar style="light" />
+      <Header
+        text={name}
+        height={'60px'}
+        width={'100%'}
+        func={null}
+        isOpen={false}
+        temSidebar={false}
+      />
+      <S.Margin margem={"32px"}>
+        <Pesquisar2
+          height={'40px'}
+          width={'90%'}
+          color="#ebebeb"
+          setups={options}
+          text={"Pesquisar seus indicadores ativos"}
+          func={selecionar}
+          values={''}
+        />
+      </S.Margin>
+      <TableComponent data={data} setData={setData} />
+      {width < 500 ? (
+        <S.StyledText>
+          Para melhor visualização deixe o celular na horizontal
+        </S.StyledText>
+      ) : null}
+      <S.Margin margem={"30%"}>
+        <ButtonComponent
+          text={"SALVAR"}
+          color="#ffa800"
+          height={'60px'}
+          width={'60%'}
+          func={() => {
+            navigation.navigate("Setup_Indicadores");
+          }}
+        />
+      </S.Margin>
     </S.Wrapper>
-
   );
 };
 

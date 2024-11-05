@@ -1,12 +1,9 @@
-import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 
 interface ContainerProps {
   align?: string;
   height?: string;
-  width?: string;
-  color?: string;
-  underline?: boolean;
 }
 
 export const Container = styled(View)<ContainerProps>`
@@ -23,7 +20,7 @@ export const Container = styled(View)<ContainerProps>`
 
 export const InvestDiv = styled(ScrollView)<ContainerProps>`
   display: flex;
-  margin-top: 0px;
+  margin-top: 24px;
   width: 100%;
   height: ${({height}) => height};
   flex-direction: column;
@@ -49,28 +46,10 @@ export const Wrapper = styled(View)`
 
 `;
 
-export const Touch = styled(TouchableOpacity)<ContainerProps>`
-  justify-content: center;
-`;
-
-export const HorizontalDiv = styled(View)<ContainerProps>`
-    display: flex;
-    height: ${({height}) => height};
-    width: ${({width}) => width};;
-    background-color: ${({color}) => color};
-    align-items: normal;
-    justify-content: space-around;
-    flex-direction: row;
-    padding-top: ${({paddingtop}) => paddingtop};
-    padding-left: 12px;
-    padding-right: 24px;
-`;
-
-export const StyledText = styled(Text)<ContainerProps>`
-  color: ${({color}) => color};
+export const StyledText = styled(Text)`
+  color: #ebebeb;
   margin-top: 24px;
-  font-size: ${({height}) => height};
-  text-decoration-line: ${({ underline }) => (underline ? 'underline' : 'none')};
+  font-size: 28px;
 `;
 
 export const InputsDiv = styled(View)`

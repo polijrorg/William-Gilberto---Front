@@ -18,7 +18,7 @@ type RootStackParamList = {
     Carteira_Real: undefined;
     Carteira_de_Estudos: undefined;
     Estratégia_Real: undefined;
-    Novo_Aporte: undefined;
+    CreateAporte: undefined;
     Estratégia_Ideal: undefined;
     Setup_Indicadores: undefined;
     Ranking: undefined;
@@ -45,7 +45,7 @@ const SideBar: React.FC<CardProps> = ({ color, width, height, func, isOpen }) =>
                     <S.StyledImage source={require('public/assets/images/carteira.png')}/>
                     <S.StyledText color='#ebebeb' size='24px'>Carteira Estudos</S.StyledText>   
                 </S.IconText>
-                <S.IconText width={'100%'}>
+                <S.IconText width={'100%'} onPress={() => {func(!isOpen);navigation.navigate("CreateAporte")}}>
                     <S.StyledImage source={require('public/assets/images/dinheiro.png')}/>
                     <S.StyledText color='#ebebeb' size='24px'>Novo Aporte</S.StyledText>   
                 </S.IconText>

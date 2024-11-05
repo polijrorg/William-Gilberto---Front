@@ -22,9 +22,12 @@ export const theme = {
 
       segments: {
         "imobiliario": "#0047bb",
-        "ações BR": '#017E3d',
-        "ações EUA": '#37fb07',
-        "ações INT": "#66f",
+        "ações br": '#017E3d',
+        "ações americanas": '#37fb07',
+        "ações eua": '#37fb07',
+        "ações int": "#66f",
+        "ações internacionais": "#66f",
+        "ações": "#123",
         "reit": "#fff",
         "reits": "#fff",
         "fii": "#0af",

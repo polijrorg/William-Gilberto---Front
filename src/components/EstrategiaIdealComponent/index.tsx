@@ -21,7 +21,6 @@ const EstrategiaIdealComponent: React.FC<CardProps> = ({ height, width, segment,
                 </S.HorizontalDiv>
                 <S.HorizontalDiv height="32px" width="30%" paddingtop = {"8px"}>
                     <S.StyledText paddingtop = {"8px"}>{segment.value}%</S.StyledText>
-                    <S.Touch><S.StyledImage paddingtop ="8px" source={require("public/assets/images/Editar.png")}/></S.Touch>
                     <S.Touch><S.StyledImage paddingtop = {"12px"} source={require("public/assets/images/X.png")}/></S.Touch>
                 </S.HorizontalDiv>
 
